@@ -1,0 +1,95 @@
+{% extends "pages/base.html" %}
+{% load staticfiles %}
+
+
+{% block content%}
+<!-- style control -->
+
+
+<!-- home 
+================================================== -->
+<section id="home" class="s-home target-section" data-parallax="scroll" data-image-src="{{curr_episode}}" data-natural-width='2800' data-natural-height='1600' data-position-y='center'>
+
+  <div class="overlay overlay_1" style="opacity:0.5"></div> 
+
+  <div class="shadow-overlay"></div>
+
+  <div class="home-content">
+    <div class="row home-content__main " style="">
+
+      {% if user.is_authenticated %}
+        {% if new_user %}
+          <h3 class="font1-heavy">Welcome to Ambient Storyboard.</h3>
+          <h1 class="font1-heavy" style="font-size:1.5em; margin-bottom:-2em">
+            Hello {{ user_extra_data.given_name }} -- you are almost there! <br><br>
+            Follow the simple steps documented <a class="" data-toggle="modal" data-target="#documentationModal" style="text-transform: none; background-color:transparent; border-width:0px; height:3.7rem; font-size:1em; color:light-blue"> here</a> to start <br>
+            tracking, and improving your online behaviors. 
+          </h1>
+        {% else %}
+          <!-- <p><br></p> -->
+          <h3 class="font1-heavy">{{date_string}}</h3>
+          <!-- <h1 class="font1-heavy" style="font-size:1.5em; margin-bottom:-2em"> -->
+          <div class="clock" style="margin-bottom:em;color:white; font-size: 1.8em;"></div>
+          <!-- </h1> -->
+        {% endif %}
+      {% else %}
+        <h3 class="font1-heavy">Welcome to Ambient Storyboard!</h3>
+        <h1 class="font1-heavy" style="font-size:1.5em; line-height:1.5em;">
+          Ambient Storyboard tracks your online habits <br>
+          and nudges you to be more focused and productive. 
+          <p style="margin-top:-0.5em; "></p>
+          Sign in now, or see the menu at the top right<br>
+          corner to learn more! 
+        </h1>
+      {% endif %}
+
+    </div>
+
+    <div class="row clients-outer" style="text-align:center; margin-top:15em">
+      <div class="col-full">
+        <div class="clients">
+            {% for i in all_episode_thumbnail %}
+              {% if forloop.counter < thumbnail_limit %}
+                <a href="{% url 'top_level_cleared' forloop.counter %}" class="clients__slide"><img src="{{i}}" /></a>
+              {% elif forloop.counter >= thumbnail_limit %}
+                <a href="{% url 'top_level' %}" class="clients__slide"><img src="{{i}}" /></a>
+              {% else %}
+                <a class="clients__slide"><img src="{{i}}" /></a>
+              {% endif %}
+
+            {% endfor %}
+        </div> <!-- end clients -->
+      </div> <!-- end col-full -->
+    </div> <!-- end clients-outer -->
+  </div> <!-- end home-content -->
+
+</section> <!-- end s-home -->
+
+<script>
+function clock() {// We create a new Date object and assign it to a variable called "time".
+var time = new Date(),
+    
+    // Access the "getHours" method on the Date object with the dot accessor.
+    hours = time.getHours(),
+    
+    // Access the "getMinutes" method with the dot accessor.
+    minutes = time.getMinutes(),
+    
+    
+    seconds = time.getSeconds();
+
+document.querySelectorAll('.clock')[0].innerHTML = harold(hours) + ":" + harold(minutes) + ":" + harold(seconds);
+  
+  function harold(standIn) {
+    if (standIn < 10) {
+      standIn = '0' + standIn
+    }
+    return standIn;
+  }
+}
+setInterval(clock, 1000);
+
+</script>
+{% include 'pages/home/home_menu_modal.html' %}
+
+{% endblock %}

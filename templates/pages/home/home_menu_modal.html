@@ -1,0 +1,121 @@
+<div class="modal" id="documentationModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div style="padding-right:1em">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:3em; padding-top:1em; color:#161616">
+        <h3>Documentation</h3>
+        <p>Ambient Storyboard displays a story of a cat named Chi in the background of your browser. If you spend time productively while online (eg. spend less time on social media), the story will progress and you will get to explore the town Chi lives. The images in the storyboard will start blurry, and become crisper as you spend your time more productively.</p>
+
+        <p>
+          <em><strong>How to start.</strong></em> Simply follow the steps below to start using Ambient Storyboard in less than 10 minutes: <br>
+          <strong>1.</strong> Sign in to Ambient Storyboard with your Gmail/Google account by clicking the "SIGN IN WITH GOOGLE" button above. <br>
+          <strong>2.</strong> Sign up to <a href="https://www.rescuetime.com/" target="_blank">RescueTime (link)</a>. Once signed in, travel to the "API and Integrations" section in the menu, and then to "API Key Management" section. Create a new API key, and copy the newly created key. RescueTime will track your online habits to see how productive you have been on a given day. By providing us with its API key, we will be able to use the data collected by RescueTime to progress the story accordingly.<br>
+          <strong>3.</strong> Go to settings under the Menu tab in Ambient Storyboard. Paste your API key in the "RescueTime API Key" textbox, and press save.<br>
+
+          <strong>4.</strong> Finally, set Ambient Storyboard as your home tab in your browser and you are ready to go!<br>
+        </p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="FAQModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div style="padding-right:1em">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:3em; padding-top:1em; color:#161616">
+        <h3>FAQ</h3>
+        <p >
+          <strong>How does RescueTime know whether I am being productive?</strong> RescueTime looks at the sites you go to and measures the amount of the time you spend on those sites. It maintains a list of sites that are often associated with being distracted online, like social media sites. The more time you spend on such sites, the more distracted it will think you are. To get more information, please see RescueTime's <a href="https://www.rescuetime.com/features" target="_blank">documentation (link)</a>.<br><br>
+
+          <strong>How does Ambient Storyboard determine when to progress the story?</strong> Based on the data of your online activities such as how much time you spent on social media sites, RescueTime determines your productivity pulse that ranges from 1 to 100 for a given day, where 1 is the least productive, and 100 is the most productive. Ambient Storyboard looks at your productivity pulse from the day before that is provided by RescueTime, and if your pulse is over a certain threshold (eg. defaults at 60), it progresses the story. You can also change the default to set your desired goal for the productivity pulse in the settings, and Ambient Storyboard will progress your story accordingly. <br><br>
+
+          <strong>Personalization (eg. I don't consider social media to be distracting!)</strong> We understand that you may have different goals and preferences when it comes to being productive online! You can easily change the sites that you consider to be distracting at RescueTime's dashboard. For more information, please see RescueTime's <a href="https://www.rescuetime.com/features" target="_blank">documentation (link)</a>. Once you change your preferences there, we will change how your progress is measured in Ambient Storyboard accordingly.<br><br>
+
+          <strong>Chi is cool, but do you offer any other forms of narration?</strong> We do! If you would prefer a narration using static art works instead of a story with a character, please try switchign to the Storyboard set 2 in the Menu >  Settings. In this case, a static art work will start off blurry, but get crisper as you progress.<br>
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="settingsModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div style="padding-right:1em">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:3em; padding-top:1em; color:#161616; ">
+        <h3 style="margin-bottom:1em">Settings</h3>
+        
+        <div style="padding:2em; background-color:#3FB34F; color:white; border-radius:2em">
+          <form method="POST" action="{% url 'get_rt_api_key_handler' %}"> {% csrf_token %}
+            <strong>RescueTime API Key.</strong> <br><br>
+            <p>Current: {{ user.rt_api_key }}</p>
+            <input type="text" name="rt_api_key" class="form-control" style="">              
+            <input type='submit' value='Send' class="btn-sm btn-success work_submit btn-rounded" />
+          </form>
+        </div>
+
+        <hr>
+
+        <div style="padding:2em; background-color:#3FB34F; color:white; border-radius:2em">
+          <form method="POST" action="{% url 'change_set_handler' %}"> {% csrf_token %}
+            <strong>Narration Type.</strong><br><br>
+            <p>Current: {{ user.active_storyboard_id }}</p>
+            <input type="radio" name="story_type" value="1" checked="checked" required> 1. Chi Exploration<br>
+            <input type="radio" name="story_type" value="2"> 2. Static Artwork<br><br>            
+            <input type='submit' value='Send' class="btn-sm btn-default work_submit btn-rounded" />
+          </form>
+        </div>
+
+        <hr>
+
+        <div style="padding:2em; background-color:#3FB34F; color:white; border-radius:2em">
+          <form method="POST" action="{% url 'set_pulse_goal_handler' %}"> {% csrf_token %}
+            <strong>Set Your Goal (1 to 100, where 100 is the most productive).</strong><br><br>
+            <p>Current: {{ user.pulse_goal }}</p>
+            <input type="number" id="pulse_goal" name="pulse_goal" min="1" max="100">       
+            <input type='submit' value='Send' class="btn-sm btn-default work_submit btn-rounded" />
+          </form>
+        </div>
+
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="creditsModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div style="padding-right:1em">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding:3em; padding-top:1em; color:#161616">
+        <h3>Credits</h3>
+        <p>The images used in Storyboard Set 1 are from <em>Flying Witch</em> by Chihiro Ishizuka and Katsushi Sakurabi et al. of J.C.Staff. </p>
+        <p>The images used in Storyboard Set 2 are from Joon Sung Park.</p>
+        <p>This project is developed and maintained by Joon Sung Park and Joshua Reynolds at University of Illinois at Urbana Champaign.</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+

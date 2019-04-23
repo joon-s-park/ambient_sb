@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+  <head>
+    <!--- basic page needs
+    ================================================== -->
+    <meta charset="utf-8">
+    <title>CS 106A</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- mobile specific metas
+    ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'glint/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'glint/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'glint/css/main.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/main.css' %}"> -->
+
+    <!-- Custom fonts
+    ================================================== -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+
+    <style>
+      strong {font-weight:700;}
+      .header-menu-toggle {
+        font-weight:900;
+      }
+      .header-menu-toggle-2 {
+        font-weight:900;
+      }
+      .contact__line1 {
+        display:block;
+        width:2px;
+        height:10.2rem;
+        background-color: #FFFFFF;
+        position: absolute;
+        right:50%;
+        bottom:0;
+      }
+      .contact__line2 {
+        display:block;
+        width:2px;
+        height:10.2rem;
+        background-color: #39b54a;
+        position: absolute;
+        right:50%;
+        top:0;
+      }
+    </style>
+    <!-- CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+
+
+    <!-- script
+    ================================================== -->
+    <script src="{% static 'glint/js/modernizr.js' %}"></script>
+    <script src="{% static 'glint/js/pace.min.js' %}"></script>
+
+    <!-- ### Favicon ### -->
+    <link rel="apple-touch-icon" sizes="57x57" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-57x57.png?Signature=pAlnZQI9NgHt4AichS7W3K1aso8%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-60x60.png?Signature=2XX%2FKdkrZLEj8COs0rKhumuFJmY%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-72x72.png?Signature=cvy82AgRxdLrFirl%2FBstMuu9Hkk%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-76x76.png?Signature=TLNX1Rq0mRz%2FqISzT%2BngXVYLupo%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-114x114.png?Signature=ykghkKt4EkbrECdWw3PyiFf5cCs%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-120x120.png?Signature=MQs0E2xt%2B7sTNERnWGi%2BR%2BidE%2Fg%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-144x144.png?Signature=s%2F9I3iTRb2Xiy60COEqOGUlGClc%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-152x152.png?Signature=6nODWgmlNSJEdOLe1fk%2BK3XXAfQ%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/apple-touch-icon-180x180.png?Signature=dTytuBNS9G96TtFE%2BUeTb2Lf8iI%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <link rel="icon" type="image/png" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/favicon-32x32.png?Signature=6svuEhjcOT13jUf9wu83%2B5Mm34k%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/favicon-194x194.png?Signature=nctUkF56GH2zwHtEr9QFJS1aL9k%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA" sizes="194x194">
+    <link rel="icon" type="image/png" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/favicon-96x96.png?Signature=hAwHr9VvDSOFUS6o3SiLS5dAP88%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA" sizes="96x96">
+    <link rel="icon" type="image/png" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/android-chrome-192x192.png?Signature=AcGn8LBXKDqF%2FRrH0JdZBg4IBvU%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA" sizes="192x192">
+    <link rel="icon" type="image/png" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/favicon-16x16.png?Signature=n7RAIk7qRWzvMT%2Bb9ZCLS5z0sos%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA" sizes="16x16">
+    <link rel="manifest" href="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/manifest.json?Signature=gsXGsUf5CGqOCHd%2BDWh9TJI6JDg%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="https://joonsungpark.s3.amazonaws.com/static/assets/other_vendor/favicon/mstile-144x144.png?Signature=ioVSBEw9aTZWVWt2O0w1abj080g%3D&Expires=1555919852&AWSAccessKeyId=AKIAJY5BVANNAMHRYSJA">
+    <meta name="theme-color" content="#ffffff">
+
+  
+  </head>
+
+  <body>
+    {% include 'pages/navbar.html' %}
+
+    {% block content %}
+    {% endblock %}
+
+  
+
+    <!-- preloader
+    ================================================== -->
+    <div id="preloader">
+      <div id="loader">
+        <div class="line-scale-pulse-out">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+    <!-- Java Script
+    ================================================== -->
+    <script src="{% static 'glint/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'glint/js/plugins.js' %}"></script>
+    <script src="{% static 'glint/js/main.js' %}"></script>
+
+  </body>
+</html>

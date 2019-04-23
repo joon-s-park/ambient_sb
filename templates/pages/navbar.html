@@ -1,0 +1,72 @@
+{% load staticfiles %}
+
+<!-- header ================================================== -->
+<header class="s-header">
+  <!-- <div class="header-logo">
+    <span class="site-logo font1-heavy" style="font-size:1.2em; color: white; ">
+      &#60;&#47;&#62; CS 106A
+    </span>
+    <br>
+  </div> -->
+
+  <nav class="header-nav">
+    <a href="#0" class="header-nav__close" title="close"><span>Close</span></a>
+    <div class="header-nav__content">
+      <h3 class="nav_title font1-medium">Menu</h3>
+      <ul class="header-nav__list">
+        <li class="current font1-medium">
+          <a class="btn btn-link" data-toggle="modal" data-target="#documentationModal" style="padding:0; letter-spacing:1px; text-transform: none; background-color:transparent; border-width:0px; height:3.7rem; font-size:1em; ">
+            Documentation
+          </a>
+        </li>
+
+        <li class="current font1-medium">
+          <a class="btn btn-link" data-toggle="modal" data-target="#FAQModal" style="padding:0; letter-spacing:1px; text-transform: none; background-color:transparent; border-width:0px; height:3.7rem; font-size:1em; ">
+            FAQ
+          </a>
+        </li>
+
+        {% if user.is_authenticated %}
+        <li>
+          <a class="btn btn-link" data-toggle="modal" data-target="#settingsModal" style="padding:0; letter-spacing:1px; text-transform: none; background-color:transparent; border-width:0px; height:3.7rem; font-size:1em; ">
+            Settings
+          </a>
+        </li>
+        {% endif %}
+        <li>
+          <a class="btn btn-link" data-toggle="modal" data-target="#creditsModal" style="padding:0; letter-spacing:1px; text-transform: none; background-color:transparent; border-width:0px; height:3.7rem; font-size:1em; ">
+            Credits
+          </a>
+        </li>
+      </ul>
+    </div> <!-- end header-nav__content -->
+  </nav>  <!-- end header-nav -->
+
+
+  <div style="text-align:right">
+    <a class="header-menu-toggle" href="#0" style="top:33px">
+      <span class="header-menu-text">Menu</span>
+      <span class="header-menu-icon"></span>
+    </a>
+
+    {% if user.is_authenticated %}
+      <a id="logout" href="/accounts/logout" class="header-menu-toggle-2">Logout</a>
+    {% else %} 
+      <a id="google_login" href="/accounts/google/login" class="header-menu-toggle-2">
+        Sign in with Google
+      </a>
+    {% endif %}
+
+  </div>
+<!-- 
+  <a href="#0" style="right:33px; top:33px">
+    Left
+  </a>
+
+  <a class="header-menu-toggle" href="#0" style="top:33px">
+    <span class="header-menu-text">Menu</span>
+    <span class="header-menu-icon"></span>
+  </a> -->
+
+</header> <!-- end s-header -->
+
